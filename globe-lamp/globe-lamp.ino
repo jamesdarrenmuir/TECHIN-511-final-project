@@ -6,17 +6,18 @@
 // goal: toggle lamp on or off when any of the buttons is pressed
 
 // TODOS:
-// add support for NeoPixel ring
+// add support for NeoPixel ring (done)
 // add support for external buttons
-// make the color WHITE a constant or something like that
 
+// using both libraries because Adafruit CircuitPlayground lacks a fill command
+// but I want to use the CircuitPlayground button functions
 #include <Adafruit_NeoPixel.h>
 #include <Adafruit_CircuitPlayground.h>
 
 // which pins are the buttons on?
-//#define BUTTON_PIN_1 6
-//#define BUTTON_PIN_2 9
-//#define BUTTON_PIN_3 10
+#define BUTTON_PIN_1 6
+#define BUTTON_PIN_2 9
+#define BUTTON_PIN_3 10
 
 // Which pin on the Arduino is connected to the NeoPixels?
 #define LED_PIN_BOARD 17 // the NeoPixels on the CircuitPlayground board itself
@@ -56,12 +57,17 @@ void setup() {
   
   pxl_init(board);
   pxl_init(ring);
+
+  // set up the buttons
+  pinMode(BUTTON_PIN_1, INPUT_PULLUP);
+  pinMode(BUTTON_PIN_2, INPUT_PULLUP);
+  pinMode(BUTTON_PIN_3, INPUT_PULLUP);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   static bool on = false;
-  if (CircuitPlayground.leftButton() || CircuitPlayground.rightButton()) {
+  if (CircuitPlayground.leftButton() || CircuitPlayground.rightButton() || !digitalRead(BUTTON_PIN_1) || !digitalRead(BUTTON_PIN_2) || !digitalRead(BUTTON_PIN_3)) {
     on = !on; // toggle
     if (on) {
       Serial.println("Lamp On");

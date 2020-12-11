@@ -15,13 +15,13 @@
 #include <Adafruit_CircuitPlayground.h>
 
 // which pins are the buttons on?
-#define BUTTON_PIN_1 6
-#define BUTTON_PIN_2 9
-#define BUTTON_PIN_3 10
+#define BUTTON_PIN_1 2
+#define BUTTON_PIN_2 10
+#define BUTTON_PIN_3 12 
 
 // Which pin on the Arduino is connected to the NeoPixels?
 #define LED_PIN_BOARD 17 // the NeoPixels on the CircuitPlayground board itself
-#define LED_PIN_RING 12 // the NeoPixel ring
+#define LED_PIN_RING 0  // the NeoPixel ring
 
 // How many NeoPixels are attached to the Arduino?
 #define LED_COUNT_BOARD 10
@@ -35,7 +35,7 @@ void pxl_init(Adafruit_NeoPixel& strip) {
   strip.show();            // Turn OFF all pixels ASAP
   // TODO: set this to a good value for the lamp
   // currently set low so it doesn't blind me when testing
-  strip.setBrightness(5); // Set BRIGHTNESS (max = 255, default = 255)
+  strip.setBrightness(255); // Set BRIGHTNESS (max = 255, default = 255)
 }
 
 void pxl_on(Adafruit_NeoPixel& strip) {
